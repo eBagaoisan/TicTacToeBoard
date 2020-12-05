@@ -19,7 +19,14 @@ TicTacToeBoard::TicTacToeBoard()
 **/
 Piece TicTacToeBoard::toggleTurn()
 {
-  return Invalid;
+  if(turn == X){
+    turn = O;
+    return O;
+  }
+  else{
+    turn = X;
+    return X;
+  }
 }
 
 /**
@@ -33,6 +40,33 @@ Piece TicTacToeBoard::toggleTurn()
 **/ 
 Piece TicTacToeBoard::placePiece(int row, int column)
 {
+  //check if spot is valid
+  if(getPiece(row, column) == Invalid){
+    return Invalid;
+  }
+
+  //check if spot is blank
+  else if(board[row][column] == Blank){
+    if(turn == X){
+      board[row][column] = X;
+      if(getWinner() == Invalid){
+       toggleTurn();
+       return X;
+      }
+    }
+    else{
+      board[row][column] = O;
+      if(getWinner() == Invalid){
+       toggleTurn();
+       return O;
+      }
+    }
+  }
+
+  //return piece in spot
+  else{
+    return getPiece(row, column);
+  }
   return Invalid;
 }
 
@@ -42,6 +76,9 @@ Piece TicTacToeBoard::placePiece(int row, int column)
 **/
 Piece TicTacToeBoard::getPiece(int row, int column)
 {
+  if((row < BOARDSIZE) && (column < BOARDSIZE)){
+    return board[row][column];
+  }
   return Invalid;
 }
 
@@ -51,5 +88,63 @@ Piece TicTacToeBoard::getPiece(int row, int column)
 **/
 Piece TicTacToeBoard::getWinner()
 {
-  return Invalid;
+  //checking for X
+  if(board[1][1] == X){
+    if(board[0][0] == X){     //left diagonal
+      if(board[2][2] == X){
+        return X;
+      }
+    }
+    if(board[0][1] == X){     //middle column
+      if(board[2][1] == X){
+        return X;
+      }
+    }
+    if(board[1][0] == X){     //middle row
+      if(board[1][2] == X){
+        return X;
+      }
+    }
+    if(board[0][2] == X){
+      if(board[2][0] == X){
+        return X;             //right diagonal
+      }
+    }
+  }
+
+  //checking for O
+  if(board[1][1] == O){
+    if(board[0][0] == O){     //left diagonal
+      if(board[2][2] == O){
+        return O;
+      }
+    }
+    if(board[0][1] == O){     //middle column
+      if(board[2][1] == O){
+        return O;
+      }
+    }
+    if(board[1][0] == O){     //middle row
+      if(board[1][2] == O){
+        return O;
+      }
+    }
+    if(board[0][2] == O){     //right diagonal
+      if(board[2][0] == O){
+        return O;             
+      }
+    }
+  }  
+  
+  //checking for blank spot
+  for(int i = 0; i < BOARDSIZE; i++){
+    for(int j = 0; j < BOARDSIZE; j++){
+      if(board[i][j] == Blank){
+        return Invalid;
+      }
+    }
+  }
+
+  //didn't return any other case, therefore tie
+  return Blank;
 }
