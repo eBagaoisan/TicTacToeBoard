@@ -62,6 +62,52 @@ TEST(TicTacToeBoardTest, X_wins){
 	ASSERT_EQ(obj.getWinner(), X);
 }
 
+//Checks left side win condition
+TEST(TicTacToeBoardTest, Left_side_win){
+	TicTacToeBoard obj;
+	obj.placePiece(0,0);
+	obj.placePiece(1,1);
+	obj.placePiece(0,1);
+	obj.placePiece(2,2);
+	obj.placePiece(0,2);
+	ASSERT_EQ(obj.getWinner(), X);
+}
+
+//Checks right side win condition
+TEST(TicTacToeBoardTest, Right_side_win){
+	TicTacToeBoard obj;
+	obj.placePiece(0,0);
+	obj.placePiece(2,2);
+	obj.placePiece(1,1);
+	obj.placePiece(2,1);
+	obj.placePiece(1,2);
+	obj.placePiece(2,0);
+	ASSERT_EQ(obj.getWinner(), O);
+}
+
+//Checks right side win condition
+TEST(TicTacToeBoardTest, Top_side_win){
+	TicTacToeBoard obj;
+	obj.placePiece(0,0);
+	obj.placePiece(1,1);
+	obj.placePiece(1,0);
+	obj.placePiece(2,2);
+	obj.placePiece(2,0);
+	ASSERT_EQ(obj.getWinner(), X);
+}
+
+//Checks right side win condition
+TEST(TicTacToeBoardTest, Bottom_side_win){
+	TicTacToeBoard obj;
+	obj.placePiece(0,0);
+	obj.placePiece(2,2);
+	obj.placePiece(1,1);
+	obj.placePiece(2,1);
+	obj.placePiece(1,2);
+	obj.placePiece(0,2);
+	ASSERT_EQ(obj.getWinner(), O);
+}
+
 //Checks if X starts
 TEST(TicTacToeBoardTest, X_starts){
 	TicTacToeBoard obj;

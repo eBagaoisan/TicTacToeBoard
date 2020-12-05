@@ -111,6 +111,30 @@ Piece TicTacToeBoard::getWinner()
       }
     }
   }
+  if(board[0][0] == X){       //top-left corner
+    if(board[1][0] == X){     //top side
+      if(board[2][0] == X){
+        return X;
+      }
+    }
+    if(board[0][1] == X){     //left side
+      if(board[0][2] == X){
+        return X;
+      }
+    }
+  }
+  if(board[2][2] == X){       //bottom-right corner
+    if(board[2][1] == X){     //right side
+      if(board[2][0]){
+        return X;
+      }
+    }
+    if(board[1][2] == X){     //bottom side
+      if(board[0][2] == X){
+        return X;
+      }
+    }
+  }
 
   //checking for O
   if(board[1][1] == O){
@@ -134,8 +158,32 @@ Piece TicTacToeBoard::getWinner()
         return O;             
       }
     }
+  }
+  if(board[0][0] == O){       //top-left corner
+    if(board[1][0] == O){     //top side
+      if(board[2][0] == O){
+        return O;
+      }
+    }
+    if(board[0][1] == O){     //left side
+      if(board[0][2] == O){
+        return O;
+      }
+    }
+  }
+  if(board[2][2] == O){       //bottom-right corner
+    if(board[2][1] == O){     //right side
+      if(board[2][0]){
+        return O;
+      }
+    }
+    if(board[1][2] == O){     //bottom side
+      if(board[0][2] == O){
+        return O;
+      }
+    }
   }  
-  
+
   //checking for blank spot
   for(int i = 0; i < BOARDSIZE; i++){
     for(int j = 0; j < BOARDSIZE; j++){
